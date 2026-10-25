@@ -701,6 +701,15 @@ function initSetupForAgent() {
   function setOpen(open) {
     popover.dataset.open = open ? "true" : "false";
     triggerBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    const backdrop = document.getElementById("agent-setup-backdrop");
+    if (backdrop) backdrop.dataset.open = open ? "true" : "false";
+    if (open) {
+      if (window.innerWidth <= 640) {
+        document.body.style.overflow = "hidden";
+      }
+    } else {
+      document.body.style.overflow = "";
+    }
   }
 
   triggerBtn.addEventListener("click", (e) => {

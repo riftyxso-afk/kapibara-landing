@@ -2,13 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
+    />
     <title>Kapibara · Verification &amp; Risk-Check Layer for AI Agents</title>
     <meta
       name="description"
       content="Your AI can act. Kapibara checks before it does. Deterministic preflight gates, 6-factor action risk scoring, cross-source consistency checks, and secret redaction for AI agents."
     />
-    <meta name="theme-color" content="#3a0303" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fcfbf9" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e0d0c" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="icon" type="image/png" href="./assets/favicon.png" />
     <link rel="apple-touch-icon" href="./assets/logo.png" />
     <link rel="stylesheet" href="./styles.css" />
@@ -199,6 +206,22 @@
                 aria-label="Setup Kapibara for your AI agent"
                 data-open="false"
               >
+                <div class="sheet-drag-handle" aria-hidden="true"></div>
+                <button
+                  type="button"
+                  class="agent-popover-close"
+                  aria-label="Close setup modal"
+                  data-close-agent-setup
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M18 6 6 18M6 6l12 12"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </button>
                 <div class="agent-popover-head">
                   <div class="agent-popover-title">
                     <h2>
@@ -388,6 +411,12 @@ claude plugin install kapibara</pre>
                   </div>
                 </div>
               </div>
+              <div
+                class="agent-setup-backdrop"
+                id="agent-setup-backdrop"
+                aria-hidden="true"
+                data-close-agent-setup
+              ></div>
             </div>
           </div>
 
