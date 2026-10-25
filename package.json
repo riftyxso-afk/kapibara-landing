@@ -1,0 +1,21 @@
+{
+  "name": "kapibara-landing",
+  "version": "1.0.0",
+  "description": "Kapibara · Verification & Risk-Check Layer for AI Agents",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "kapibara",
+    "landing-page",
+    "ai-agents",
+    "risk-assessment",
+    "preflight",
+    "mcp"
+  ],
+  "author": "riftyxso",
+  "license": "MIT"
+}
