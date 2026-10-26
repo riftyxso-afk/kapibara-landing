@@ -1,0 +1,10 @@
+# Kapibara river footer
+
+- Asset: `kapibara-river-footer.webp` (2172 × 724).
+- Created with the built-in ImageGen tool for this website.
+- The generated PNG is preserved in the original image-generation output directory; the site uses a WebP encoding of the same artwork for a smaller download.
+- The image is decorative. Its crop and top-edge blend are controlled by `.footer-landscape` in `styles.css`.
+
+## Generation prompt
+
+Use case: illustration-story. Asset type: original wide landscape artwork for the bottom band of the Kapibara developer-tool website footer. Generate a new image, not a website mockup. A quietly beautiful panoramic oil-and-gouache painting of a capybara habitat: a slow winding river in an expansive grassland wetland, a few graceful low trees on the far banks, soft rolling distant hills and warm late-afternoon light. Three small natural brown capybaras resting peacefully together on the riverbank, the central group near the lower middle, recognizable rounded heads and small ears; subtle wildlife, not cartoon mascots. Restrained editorial landscape illustration with visible fine brushwork and textured paper, crafted and atmospheric rather than a glossy digital render. Very wide horizontal panorama, 3:1 aspect ratio, composed to work as a shallow footer banner. Main grass, water, trees, capybaras and all important detail in the lower 55 percent, with distant hills around the middle. Upper 35 percent is spacious near-blank pale warm ivory sky, exact color close to #f8f7f4 at its top edge, with no hard horizon or dark detail there, so the painting naturally dissolves into an ivory website background above. Palette: olive and sage green grasses, golden straw, muted warm brown capybaras, a narrow gentle rust-orange reflected glint on the river, pale ivory sky. Make the landscape richly observed and layered with foreground grasses, a reflective river and distant tree-lined marshland, but keep it serene and uncluttered. No typography, no words, no logos, no watermarks, no UI, no border, no frame, no buildings.

@@ -17,7 +17,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="icon" type="image/png" href="./assets/favicon.png" />
     <link rel="apple-touch-icon" href="./assets/logo.png" />
-    <link rel="stylesheet" href="./styles.css?v=7" />
+    <link rel="stylesheet" href="./styles.css?v=9" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -1798,65 +1798,65 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
 
       </main>
 
-      <!-- ============================================================ -->
-      <!-- FOOTER (exact terms.so .landing-footer.landing-col)          -->
-      <!-- ============================================================ -->
-      <footer class="landing-footer landing-col">
-        <div class="landing-footer-brand">
-          <a aria-label="Kapibara home" class="landing-mark" href="#top">
-            <img
-              class="landing-mark-logo"
-              src="./assets/logo.png"
-              alt="Kapibara logo"
-              width="32"
-              height="32"
-            />
-            <span class="landing-mark-word">Kapibara</span>
-          </a>
-          <p class="landing-footer-description">
-            Kapibara is a lightweight verification and risk-check layer for AI agents. Before an
-            agent deletes files, force-pushes, deploys to production, or sends sensitive payloads
-            externally, Kapibara evaluates project rules in
-            <code>.kapibara/rules.md</code>, scores risk across six deterministic factors, and
-            returns structured decisions over MCP stdio.
-          </p>
+      <footer class="landing-footer" id="footer">
+        <div class="footer-inner landing-col">
+          <div class="footer-main">
+            <div class="landing-footer-brand">
+              <a aria-label="Kapibara home" class="landing-mark" href="#top">
+                <img class="landing-mark-logo" src="./assets/logo.png" alt="" width="32" height="32" />
+                <span class="landing-mark-word">Kapibara</span>
+              </a>
+              <p class="landing-footer-description">A little pause before a big action. Verify what your AI agent is about to do.</p>
+              <a class="footer-source-link" href="https://github.com/riftyxso-afk/kapibara-landing" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18" /></svg>
+                Explore the source
+              </a>
+              <p class="footer-principle"><span aria-hidden="true"></span>Read-only tools. Your agent stays in control.</p>
+            </div>
+
+            <nav aria-label="Footer product" class="landing-footer-group">
+              <h2 class="landing-footer-label">Product</h2>
+              <ul class="landing-footer-links">
+                <li><a class="landing-footer-link" href="#preflight">Preflight checks</a></li>
+                <li><a class="landing-footer-link" href="#risk">Action risk</a></li>
+                <li><a class="landing-footer-link" href="#verify">Scan &amp; compare</a></li>
+                <li><a class="landing-footer-link" href="#playground">Playground</a></li>
+              </ul>
+            </nav>
+
+            <nav aria-label="Footer resources" class="landing-footer-group">
+              <h2 class="landing-footer-label">Resources</h2>
+              <ul class="landing-footer-links">
+                <li><a class="landing-footer-link" href="#skills">Skills &amp; tools</a></li>
+                <li><a class="landing-footer-link" href="#rules">Policy profiles</a></li>
+                <li><a class="landing-footer-link" href="https://github.com/riftyxso-afk/kapibara-landing" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+              </ul>
+            </nav>
+
+            <nav aria-label="Footer agent setup" class="landing-footer-group footer-agents">
+              <h2 class="landing-footer-label">Connect your agent</h2>
+              <ul class="landing-footer-links">
+                <li><a class="landing-footer-link" href="#top" data-select-agent="claude-code">Claude Code</a></li>
+                <li><a class="landing-footer-link" href="#top" data-select-agent="codex">OpenAI Codex</a></li>
+                <li><a class="landing-footer-link" href="#top" data-select-agent="cursor">Cursor</a></li>
+                <li><a class="landing-footer-link" href="#top" data-select-agent="opencode">OpenCode</a></li>
+                <li><a class="landing-footer-link" href="#top" data-select-agent="claude-desktop">Claude Desktop</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2026 Kapibara.</p>
+            <div class="footer-actions">
+              <a href="#top" class="footer-back-top">Back to top</a>
+              <button type="button" class="footer-setup-link" data-open-agent-setup>Set up your agent <span aria-hidden="true">↗</span></button>
+            </div>
+          </div>
         </div>
 
-        <nav aria-label="Skills" class="landing-footer-group">
-          <h2 class="landing-footer-label">Skills &amp; Tools</h2>
-          <ul class="landing-footer-links">
-            <li><a class="landing-footer-link" href="#preflight">preflight-check</a></li>
-            <li><a class="landing-footer-link" href="#risk">action-risk</a></li>
-            <li><a class="landing-footer-link" href="#risk">second-opinion</a></li>
-            <li><a class="landing-footer-link" href="#verify">consistency-check</a></li>
-            <li><a class="landing-footer-link" href="#verify">sensitive-data-check</a></li>
-          </ul>
-        </nav>
-
-        <nav aria-label="Setup" class="landing-footer-group">
-          <h2 class="landing-footer-label">Agent Setup</h2>
-          <ul class="landing-footer-links">
-            <li>
-              <a class="landing-footer-link" href="#top" data-select-agent="claude-code"
-                >Claude Code</a
-              >
-            </li>
-            <li>
-              <a class="landing-footer-link" href="#top" data-select-agent="codex">OpenAI Codex</a>
-            </li>
-            <li>
-              <a class="landing-footer-link" href="#top" data-select-agent="cursor">Cursor</a>
-            </li>
-            <li>
-              <a class="landing-footer-link" href="#top" data-select-agent="opencode">OpenCode</a>
-            </li>
-            <li>
-              <a class="landing-footer-link" href="#top" data-select-agent="claude-desktop"
-                >Claude Desktop</a
-              >
-            </li>
-          </ul>
-        </nav>
+        <figure class="footer-landscape" aria-hidden="true">
+          <img src="./assets/kapibara-river-footer.webp" alt="" width="2172" height="724" loading="lazy" decoding="async" fetchpriority="low" />
+        </figure>
       </footer>
     </div>
 

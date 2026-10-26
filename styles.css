@@ -386,15 +386,6 @@ th {
   display: block;
 }
 
-.landing-footer .landing-mark-logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  box-shadow:
-    0 0 0 1px rgba(22, 21, 18, 0.1),
-    0 2px 6px rgba(22, 21, 18, 0.12);
-}
-
 .kapibara-badge-logo {
   width: 24px;
   height: 24px;
@@ -503,10 +494,6 @@ th {
 
 .landing--home .landing-nav a.landing-mark {
   color: var(--page-tint);
-}
-
-.landing--home .landing-footer a.landing-mark {
-  color: var(--accent);
 }
 
 .landing--home .landing-hero {
@@ -2383,70 +2370,6 @@ th {
   font-weight: 500;
 }
 
-/* === Footer (exact terms.so .landing-footer) === */
-.landing-footer {
-  color: var(--ink);
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
-  align-items: start;
-  gap: 48px;
-  padding: 64px 0;
-  display: grid;
-}
-
-.landing-footer-brand {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  max-width: 380px;
-  display: flex;
-}
-
-.landing-footer-description {
-  color: #6f6a63;
-  margin: 0;
-  font-size: 12.5px;
-  font-weight: 400;
-  line-height: 1.55;
-}
-
-.landing-footer-group {
-  flex-direction: column;
-  gap: 16px;
-  display: flex;
-}
-
-.landing-footer-label {
-  letter-spacing: var(--type-tracking-small);
-  color: #6f6a63;
-  margin: 0;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.35;
-}
-
-.landing-footer-links {
-  flex-direction: column;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-}
-
-.landing a.landing-footer-link {
-  color: var(--ink);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.35;
-  display: inline-block;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .landing a.landing-footer-link:hover {
-    color: #6f6a63;
-  }
-}
-
 /* === Responsive Breakpoints (Mobile-Native 3-State Architecture) === */
 
 /* --- TIER 1: Small Laptop & Tablet (max-width: 1024px) --- */
@@ -2824,22 +2747,6 @@ th {
   }
 
   /* Footer Mobile Reflow */
-  .landing-footer {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px 16px;
-    padding: 40px 0 calc(40px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .landing-footer-brand {
-    grid-column: 1 / -1;
-  }
-
-  .landing-footer a.landing-footer-link {
-    padding: 6px 0;
-    min-height: 38px;
-    display: inline-flex;
-    align-items: center;
-  }
 }
 
 /* --- TIER 4: Compact Mobile / iPhone SE (max-width: 380px) --- */
@@ -2852,11 +2759,6 @@ th {
     grid-template-columns: 96px 1fr 30px;
     font-size: 10px;
     gap: 6px;
-  }
-
-  .landing-footer {
-    grid-template-columns: 1fr;
-    gap: 24px;
   }
 }
 
@@ -3156,10 +3058,6 @@ th {
 .landing-table code {
   overflow-wrap: anywhere;
 }
-.landing-footer {
-  margin-top: 72px;
-  border-top: 1px solid #e6e1d9;
-}
 .output-verdict-banner {
   flex-direction: column;
   align-items: flex-start;
@@ -3324,9 +3222,6 @@ th {
   }
   .policy-heading h3 {
     font-size: 23px;
-  }
-  .landing-footer {
-    margin-top: 48px;
   }
 }
 
@@ -3695,10 +3590,6 @@ th {
     color: #817568;
     font: 400 13px/1.5 var(--font-diatype);
   }
-
-  .landing-footer a.landing-footer-link {
-    min-height: 44px;
-  }
 }
 
 @media (max-width: 640px), (max-width: 900px) and (max-height: 500px) {
@@ -3795,5 +3686,279 @@ th {
 @media (max-width: 380px) {
   .landing--home .landing-hero .landing-headline {
     font-size: clamp(28px, 8.4vw, 32px);
+  }
+}
+
+/* A quiet close: useful links above the capybaras' riverbank. */
+.landing-footer {
+  width: 100%;
+  max-width: 1440px;
+  margin-top: 88px;
+  border-top: 1px solid #e6e3db;
+  color: #30342b;
+  background: var(--page-tint);
+}
+
+.footer-inner {
+  margin-inline: auto;
+  padding-top: 72px;
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 48px;
+}
+
+.landing-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  max-width: 280px;
+}
+
+.landing--home .landing-footer a.landing-mark {
+  color: #30342b;
+  min-height: 44px;
+  gap: 10px;
+}
+
+.landing-footer .landing-mark-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  box-shadow: none;
+}
+
+.landing-footer .landing-mark-word {
+  font-size: 21px;
+  letter-spacing: -0.035em;
+}
+
+.landing-footer-description {
+  margin: 0;
+  color: #6a7062;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.landing .footer-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  color: #6e7465;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.footer-source-link svg {
+  flex-shrink: 0;
+}
+
+.footer-principle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: #59644e;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.footer-principle > span {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6c8a54;
+  box-shadow: 0 0 0 3px #6c8a5414;
+}
+
+.landing-footer-group {
+  min-width: 0;
+}
+
+.landing-footer-label {
+  margin: 7px 0 18px;
+  color: #6e7465;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.landing-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.landing a.landing-footer-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  color: #666c60;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.footer-copyright {
+  color: #6e7465;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.landing .footer-back-top {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #6e7465;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.footer-setup-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #3b4730;
+  font: 500 13px/1.5 var(--font-diatype);
+  cursor: pointer;
+}
+
+.footer-landscape {
+  height: clamp(230px, 25vw, 360px);
+  margin: 20px 0 0;
+  overflow: hidden;
+}
+
+.footer-landscape img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 28%);
+  mask-image: linear-gradient(to bottom, transparent, #000 28%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .landing-footer a:hover,
+  .footer-setup-link:hover {
+    color: #bc522b;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer-main {
+    gap: 28px;
+    grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    padding-top: 48px;
+  }
+
+  .footer-main {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 36px 24px;
+  }
+
+  .landing-footer-brand {
+    grid-column: 1 / -1;
+    max-width: 380px;
+    gap: 12px;
+  }
+
+  .footer-principle {
+    margin-top: 8px;
+  }
+
+  .landing-footer-label {
+    font-size: 13px;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  .landing a.landing-footer-link,
+  .landing .footer-source-link {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 640px), (max-width: 900px) and (max-height: 500px) {
+  .landing-footer {
+    margin-top: 56px;
+  }
+
+  .footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 20px;
+  }
+
+  .footer-agents {
+    grid-column: 1 / -1;
+  }
+
+  .footer-agents .landing-footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
+  }
+
+  .landing-footer-description {
+    max-width: 290px;
+  }
+
+  .footer-bottom {
+    margin-top: 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .footer-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .footer-landscape {
+    height: 220px;
+    margin-top: 16px;
   }
 }
