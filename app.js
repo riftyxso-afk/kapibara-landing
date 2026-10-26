@@ -637,6 +637,73 @@ args = ["/path/to/kapibara/packages/mcp/dist/cli.js", "--cwd", "/path/to/your/pr
   },
 };
 
+function initMobileLayout() {
+  const toggle = document.getElementById("mobile-menu-toggle");
+  const nav = document.getElementById("primary-navigation");
+  const header = document.querySelector(".landing-nav");
+  const compact = window.matchMedia(
+    "(max-width: 768px), (max-width: 900px) and (max-height: 500px)",
+  );
+  const disclosures = [...document.querySelectorAll("[data-mobile-details]")];
+  const runButton = document.getElementById("run-playground-btn");
+  const playgroundToolbar = document.querySelector(".playground-toolbar");
+  const playgroundInputs = document.querySelector(".playground-inputs");
+  if (!toggle || !nav || !header) return;
+
+  function setMenuOpen(open, restoreFocus = false) {
+    const expanded = compact.matches && open;
+    toggle.setAttribute("aria-expanded", String(expanded));
+    toggle.querySelector("span").textContent = expanded ? "Close" : "Menu";
+    header.dataset.menuOpen = String(expanded);
+    nav.inert = compact.matches && !expanded;
+    if (restoreFocus) toggle.focus({ preventScroll: true });
+  }
+
+  function syncLayout() {
+    const focusWasInNav = nav.contains(document.activeElement);
+    setMenuOpen(false, compact.matches && focusWasInNav);
+    disclosures.forEach((details) => {
+      details.open = !compact.matches;
+    });
+    const runButtonParent = compact.matches ? playgroundInputs : playgroundToolbar;
+    if (runButton && runButtonParent && runButton.parentElement !== runButtonParent) {
+      runButtonParent.appendChild(runButton);
+    }
+  }
+
+  toggle.addEventListener("click", () =>
+    setMenuOpen(toggle.getAttribute("aria-expanded") !== "true"),
+  );
+  nav.addEventListener(
+    "click",
+    (event) => {
+      if (event.target.closest("a, button")) queueMicrotask(() => setMenuOpen(false));
+    },
+    { capture: true },
+  );
+  document.addEventListener("click", (event) => {
+    if (!header.contains(event.target)) setMenuOpen(false);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true")
+      setMenuOpen(false, true);
+  });
+  compact.addEventListener("change", syncLayout);
+  document.documentElement.classList.add("mobile-navigation-ready");
+  syncLayout();
+  // Match the gradient to the actual masthead, including a wrapped or expanded menu.
+  const hero = document.querySelector(".landing-hero");
+  const integrations = document.querySelector(".integration-strip");
+  const landing = document.querySelector(".landing--home");
+  if (hero && integrations && landing) {
+    const resize = new ResizeObserver(() => {
+      const height = header.offsetHeight + hero.offsetHeight + integrations.offsetHeight + 32;
+      landing.style.setProperty("--mobile-hero-height", `${height}px`);
+    });
+    [header, hero, integrations].forEach((element) => resize.observe(element));
+  }
+}
+
 function initSetupForAgent() {
   const container = document.getElementById("agent-setup-container");
   const triggerBtn = document.getElementById("agent-setup-btn");
@@ -656,7 +723,45 @@ function initSetupForAgent() {
   let copyTimeout = null;
   let opener = triggerBtn;
   const tabs = [...popover.querySelectorAll(".agent-tab")];
-  const mobile = window.matchMedia("(max-width: 640px)");
+  const mobile = window.matchMedia(
+    "(max-width: 640px), (max-width: 900px) and (max-height: 500px)",
+  );
+  let lockedScrollY = null;
+  const backgroundStates = new Map();
+
+  function syncSheetScroll() {
+    const lock = mobile.matches && popover.dataset.open === "true";
+    if (lock && lockedScrollY === null) {
+      lockedScrollY = window.scrollY;
+      document.body.style.top = `-${lockedScrollY}px`;
+      document.body.classList.add("agent-sheet-open");
+      document
+        .querySelectorAll(
+          ".landing-nav, .hero-intro, .hero-feature-chips, .hero-btn-orange, .integration-strip, .LandingPreview-module__aN7EWG__previews, #playground, #skills, .landing-footer",
+        )
+        .forEach((element) => {
+          backgroundStates.set(element, element.inert);
+          element.inert = true;
+        });
+    } else if (!lock && lockedScrollY !== null) {
+      const scrollY = lockedScrollY;
+      lockedScrollY = null;
+      document.body.classList.remove("agent-sheet-open");
+      document.body.style.top = "";
+      backgroundStates.forEach((inert, element) => {
+        element.inert = inert;
+      });
+      backgroundStates.clear();
+      window.scrollTo({ top: scrollY, behavior: "instant" });
+    }
+  }
+
+  function restoreOpenerFocus() {
+    const target = opener.closest("[inert]")
+      ? document.getElementById("mobile-menu-toggle")
+      : opener;
+    target?.focus({ preventScroll: true });
+  }
 
   function resetCopyState() {
     clearTimeout(copyTimeout);
@@ -697,8 +802,7 @@ function initSetupForAgent() {
           : Math.max(16 - rect.top, window.innerHeight - 16 - height - rect.top);
     }
     popover.style.setProperty("--popover-top", `${top}px`);
-    document.body.style.overflow =
-      mobile.matches && popover.dataset.open === "true" ? "hidden" : "";
+    syncSheetScroll();
     popover.setAttribute("aria-modal", String(mobile.matches));
   }
 
@@ -714,7 +818,7 @@ function initSetupForAgent() {
     positionPopover();
     if (open)
       tabs.find((tab) => tab.dataset.agent === currentAgent)?.focus({ preventScroll: true });
-    else if (restoreFocus) opener.focus({ preventScroll: true });
+    else if (restoreFocus) restoreOpenerFocus();
   }
 
   triggerBtn.addEventListener("click", (e) => {
@@ -726,7 +830,7 @@ function initSetupForAgent() {
   document.querySelectorAll("[data-open-agent-setup]").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (!mobile.matches) window.scrollTo({ top: 0, behavior: "instant" });
       setOpen(true, btn);
     });
   });
@@ -745,7 +849,7 @@ function initSetupForAgent() {
       if (agent && AGENT_CONFIGS[agent]) {
         currentAgent = agent;
         renderAgentConfig();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (!mobile.matches) window.scrollTo({ top: 0, behavior: "instant" });
         setOpen(true, link);
       }
     });
@@ -837,7 +941,7 @@ function initSetupForAgent() {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && popover.dataset.open === "true") {
       setOpen(false);
-      opener.focus({ preventScroll: true });
+      restoreOpenerFocus();
     }
     if (e.key === "Tab" && mobile.matches && popover.dataset.open === "true") {
       const focusable = [
@@ -885,6 +989,9 @@ function createPreviewLoop({ sectionId, durationMs, staticTimeMs, onTick }) {
   let intersecting = true;
   let timer = null;
   const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const compactQuery = window.matchMedia(
+    "(max-width: 768px), (max-width: 900px) and (max-height: 500px)",
+  );
 
   function renderAt(t, loopState) {
     if (loopEl) loopEl.setAttribute("data-loop-state", loopState);
@@ -909,8 +1016,8 @@ function createPreviewLoop({ sectionId, durationMs, staticTimeMs, onTick }) {
       toggleBtn.setAttribute("title", isPaused ? "Resume animation" : "Pause animation");
     }
     if (pauseIcon && playIcon) {
-      pauseIcon.hidden = isPaused;
-      playIcon.hidden = !isPaused;
+      pauseIcon.toggleAttribute("hidden", isPaused);
+      playIcon.toggleAttribute("hidden", !isPaused);
     }
   }
 
@@ -919,10 +1026,10 @@ function createPreviewLoop({ sectionId, durationMs, staticTimeMs, onTick }) {
       clearInterval(timer);
       timer = null;
     }
-    const isPaused = userPaused ?? reducedMotionQuery.matches;
+    const isPaused = userPaused ?? (reducedMotionQuery.matches || compactQuery.matches);
     syncButtonState(isPaused);
 
-    if (reducedMotionQuery.matches && userPaused === null) {
+    if ((reducedMotionQuery.matches || compactQuery.matches) && userPaused === null) {
       time = staticTimeMs;
       renderAt(staticTimeMs, "playing");
       return;
@@ -942,7 +1049,7 @@ function createPreviewLoop({ sectionId, durationMs, staticTimeMs, onTick }) {
 
   if (toggleBtn) {
     toggleBtn.addEventListener("click", () => {
-      const currentlyPaused = userPaused ?? reducedMotionQuery.matches;
+      const currentlyPaused = userPaused ?? (reducedMotionQuery.matches || compactQuery.matches);
       userPaused = !currentlyPaused;
       if (!userPaused && time === staticTimeMs) {
         time = 0;
@@ -961,6 +1068,7 @@ function createPreviewLoop({ sectionId, durationMs, staticTimeMs, onTick }) {
   io.observe(section);
   document.addEventListener("visibilitychange", updateScheduler);
   reducedMotionQuery.addEventListener("change", updateScheduler);
+  compactQuery.addEventListener("change", updateScheduler);
 
   // Start at a rich visible frame immediately so first paint has full content,
   // then advance smoothly through the loop.
@@ -1432,6 +1540,7 @@ function initPlayground() {
 // Initialize Everything on DOMContentLoaded
 // ----------------------------------------------------------------------------
 function boot() {
+  initMobileLayout();
   initHeroPoetry();
   initHeroHeadline();
   initPillRail();

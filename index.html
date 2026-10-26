@@ -11,14 +11,13 @@
       name="description"
       content="Your AI can act. Kapibara checks before it does. Deterministic preflight gates, 6-factor action risk scoring, cross-source consistency checks, and secret redaction for AI agents."
     />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fcfbf9" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e0d0c" />
+    <meta name="theme-color" content="#26120f" />
     <meta name="color-scheme" content="light" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="icon" type="image/png" href="./assets/favicon.png" />
     <link rel="apple-touch-icon" href="./assets/logo.png" />
-    <link rel="stylesheet" href="./styles.css?v=4" />
+    <link rel="stylesheet" href="./styles.css?v=7" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -35,7 +34,11 @@
           />
           <span class="landing-mark-word">Kapibara</span>
         </a>
-        <nav aria-label="Primary" class="pill-navigation landing-actions">
+        <button type="button" class="mobile-menu-toggle" id="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-navigation">
+          <span>Menu</span>
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h16M4 16h16" /></svg>
+        </button>
+        <nav id="primary-navigation" aria-label="Primary" class="pill-navigation landing-actions">
           <div class="pill-navigation-rail" id="top-pill-rail" data-clip="off" data-animated="true">
             <div class="pill-navigation-links">
               <a class="action-button action-button--ghost action-button--compact" href="#preflight"
@@ -704,118 +707,124 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
                         </div>
                       </div>
 
-                      <div class="LandingPreview-module__aN7EWG__documentShell">
-                        <div class="LandingPreview-module__aN7EWG__documentToolbar">
-                          <span>.kapibara/rules.md · profile: balanced</span>
-                          <div class="LandingPreview-module__aN7EWG__statusStack">
-                            <span id="preflight-status-checking" data-show="false"
-                              >Evaluating rules…</span
-                            >
-                            <span
-                              class="LandingPreview-module__aN7EWG__saved"
-                              id="preflight-status-enforced"
+                      <details class="preview-details" data-mobile-details open>
+                        <summary>
+                          Read the full preflight report
+                          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                        </summary>
+                        <div class="LandingPreview-module__aN7EWG__documentShell">
+                          <div class="LandingPreview-module__aN7EWG__documentToolbar">
+                            <span>.kapibara/rules.md · profile: balanced</span>
+                            <div class="LandingPreview-module__aN7EWG__statusStack">
+                              <span id="preflight-status-checking" data-show="false"
+                                >Evaluating rules…</span
+                              >
+                              <span
+                                class="LandingPreview-module__aN7EWG__saved"
+                                id="preflight-status-enforced"
+                                data-show="true"
+                              >
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                                  <path
+                                    d="m5 12.5 4.5 4.5L19 7.5"
+                                    stroke="currentColor"
+                                    stroke-width="2.2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                                Policy enforced
+                              </span>
+                            </div>
+                          </div>
+
+                          <article class="contract LandingPreview-module__aN7EWG__paper">
+                            <div
+                              class="LandingPreview-module__aN7EWG__paperTitle LandingPreview-module__aN7EWG__reveal"
+                              id="preflight-doc-title"
                               data-show="true"
                             >
-                              <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                                <path
-                                  d="m5 12.5 4.5 4.5L19 7.5"
-                                  stroke="currentColor"
-                                  stroke-width="2.2"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                />
-                              </svg>
-                              Policy enforced
-                            </span>
-                          </div>
-                        </div>
-
-                        <article class="contract LandingPreview-module__aN7EWG__paper">
-                          <div
-                            class="LandingPreview-module__aN7EWG__paperTitle LandingPreview-module__aN7EWG__reveal"
-                            id="preflight-doc-title"
-                            data-show="true"
-                          >
-                            <div>
-                              <h4>Preflight Gate Report</h4>
-                              <p>kapibara_preflight · kapibara_rules_check</p>
+                              <div>
+                                <h4>Preflight Gate Report</h4>
+                                <p>kapibara_preflight · kapibara_rules_check</p>
+                              </div>
+                              <span class="dashboard-status dashboard-status--block"
+                                >BLOCK · 89 / 100</span
+                              >
                             </div>
-                            <span class="dashboard-status dashboard-status--block"
-                              >BLOCK · 89 / 100</span
+
+                            <div
+                              class="LandingPreview-module__aN7EWG__documentSection LandingPreview-module__aN7EWG__reveal"
+                              id="preflight-sec-1"
+                              data-show="true"
                             >
-                          </div>
+                              <h5>1. Classification &amp; Decision</h5>
+                              <p>
+                                Action classified as <strong>git_force_push</strong> (category:
+                                <strong>git</strong>) targeting protected branch
+                                <strong>origin/main</strong>. Binding decision:
+                                <strong>BLOCK</strong> (severity: <strong>critical</strong>).
+                              </p>
+                            </div>
+
+                            <div
+                              class="LandingPreview-module__aN7EWG__documentSection LandingPreview-module__aN7EWG__reveal"
+                              id="preflight-sec-2"
+                              data-show="true"
+                            >
+                              <h5>2. Matched Project Rules (.kapibara/rules.md)</h5>
+                              <p>
+                                Matched rule
+                                <strong>"Never force-push to main or master"</strong> (decision:
+                                <strong>block</strong>) and
+                                <strong>"Ask before deploying to production"</strong> (decision:
+                                <strong>require_approval</strong>).
+                              </p>
+                            </div>
+
+                            <div
+                              class="LandingPreview-module__aN7EWG__documentSection LandingPreview-module__aN7EWG__reveal"
+                              id="preflight-sec-3"
+                              data-show="true"
+                            >
+                              <h5>3. Detected Issues</h5>
+                              <p>
+                                <strong>[critical] git_force_push:</strong> Force push can overwrite
+                                remote commit history.<br />
+                                <strong>[high] protected_branch_write:</strong> Target branch
+                                <strong>main</strong> is protected.
+                              </p>
+                            </div>
+
+                            <div
+                              class="LandingPreview-module__aN7EWG__documentSection LandingPreview-module__aN7EWG__reveal"
+                              id="preflight-sec-4"
+                              data-show="true"
+                            >
+                              <h5>4. Safer Recommendation</h5>
+                              <p>
+                                Push to a new branch (<code>git push -u origin feat/release-v2.4</code
+                                >), open a pull request, and request explicit human approval before
+                                deploying to production.
+                              </p>
+                            </div>
+                          </article>
 
                           <div
-                            class="LandingPreview-module__aN7EWG__documentSection LandingPreview-module__aN7EWG__reveal"
-                            id="preflight-sec-1"
+                            class="LandingPreview-module__aN7EWG__documentFooter LandingPreview-module__aN7EWG__reveal"
+                            id="preflight-doc-footer"
                             data-show="true"
                           >
-                            <h5>1. Classification &amp; Decision</h5>
-                            <p>
-                              Action classified as <strong>git_force_push</strong> (category:
-                              <strong>git</strong>) targeting protected branch
-                              <strong>origin/main</strong>. Binding decision:
-                              <strong>BLOCK</strong> (severity: <strong>critical</strong>).
-                            </p>
+                            <span>Fail-closed fallback: require_approval</span>
+                            <a
+                              href="#playground"
+                              class="action-button action-button--secondary action-button--compact"
+                            >
+                              Test in playground
+                            </a>
                           </div>
-
-                          <div
-                            class="LandingPreview-module__aN7EWG__documentSection LandingPreview-module__aN7EWG__reveal"
-                            id="preflight-sec-2"
-                            data-show="true"
-                          >
-                            <h5>2. Matched Project Rules (.kapibara/rules.md)</h5>
-                            <p>
-                              Matched rule
-                              <strong>"Never force-push to main or master"</strong> (decision:
-                              <strong>block</strong>) and
-                              <strong>"Ask before deploying to production"</strong> (decision:
-                              <strong>require_approval</strong>).
-                            </p>
-                          </div>
-
-                          <div
-                            class="LandingPreview-module__aN7EWG__documentSection LandingPreview-module__aN7EWG__reveal"
-                            id="preflight-sec-3"
-                            data-show="true"
-                          >
-                            <h5>3. Detected Issues</h5>
-                            <p>
-                              <strong>[critical] git_force_push:</strong> Force push can overwrite
-                              remote commit history.<br />
-                              <strong>[high] protected_branch_write:</strong> Target branch
-                              <strong>main</strong> is protected.
-                            </p>
-                          </div>
-
-                          <div
-                            class="LandingPreview-module__aN7EWG__documentSection LandingPreview-module__aN7EWG__reveal"
-                            id="preflight-sec-4"
-                            data-show="true"
-                          >
-                            <h5>4. Safer Recommendation</h5>
-                            <p>
-                              Push to a new branch (<code>git push -u origin feat/release-v2.4</code
-                              >), open a pull request, and request explicit human approval before
-                              deploying to production.
-                            </p>
-                          </div>
-                        </article>
-
-                        <div
-                          class="LandingPreview-module__aN7EWG__documentFooter LandingPreview-module__aN7EWG__reveal"
-                          id="preflight-doc-footer"
-                          data-show="true"
-                        >
-                          <span>Fail-closed fallback: require_approval</span>
-                          <a
-                            href="#playground"
-                            class="action-button action-button--secondary action-button--compact"
-                          >
-                            Test in playground
-                          </a>
                         </div>
-                      </div>
+                      </details>
                     </div>
                   </div>
                 </div>
@@ -979,87 +988,93 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
                         </div>
 
                         <!-- 6-Factor Breakdown + Second Opinion Citation Card -->
-                        <div
-                          class="risk-citation-card LandingPreview-module__aN7EWG__reveal"
-                          id="risk-citation"
-                          data-show="true"
-                        >
-                          <div class="risk-factors-list">
-                            <div class="thread-meta">
-                              <strong>6-Factor Risk Score Breakdown</strong>
-                              <span>78 / 100 · critical</span>
-                            </div>
-                            <div class="risk-factor-row">
-                              <span class="risk-factor-name">destructive_impact</span>
-                              <div class="risk-factor-track">
-                                <div class="risk-factor-fill" style="width: 88%"></div>
-                              </div>
-                              <span class="risk-factor-score">22/25</span>
-                            </div>
-                            <div class="risk-factor-row">
-                              <span class="risk-factor-name">reversibility</span>
-                              <div class="risk-factor-track">
-                                <div class="risk-factor-fill" style="width: 90%"></div>
-                              </div>
-                              <span class="risk-factor-score">18/20</span>
-                            </div>
-                            <div class="risk-factor-row">
-                              <span class="risk-factor-name">sensitive_data</span>
-                              <div class="risk-factor-track">
-                                <div class="risk-factor-fill" style="width: 30%"></div>
-                              </div>
-                              <span class="risk-factor-score">6/20</span>
-                            </div>
-                            <div class="risk-factor-row">
-                              <span class="risk-factor-name">external_side_effects</span>
-                              <div class="risk-factor-track">
-                                <div class="risk-factor-fill" style="width: 80%"></div>
-                              </div>
-                              <span class="risk-factor-score">12/15</span>
-                            </div>
-                            <div class="risk-factor-row">
-                              <span class="risk-factor-name">production_impact</span>
-                              <div class="risk-factor-track">
-                                <div class="risk-factor-fill" style="width: 100%"></div>
-                              </div>
-                              <span class="risk-factor-score">10/10</span>
-                            </div>
-                            <div class="risk-factor-row">
-                              <span class="risk-factor-name">uncertainty</span>
-                              <div class="risk-factor-track">
-                                <div class="risk-factor-fill" style="width: 100%"></div>
-                              </div>
-                              <span class="risk-factor-score">10/10</span>
-                            </div>
-                          </div>
-
-                          <div class="second-opinion-box">
-                            <div>
+                        <details class="preview-details" data-mobile-details open>
+                          <summary>
+                            View risk factors and review
+                            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                          </summary>
+                          <div
+                            class="risk-citation-card LandingPreview-module__aN7EWG__reveal"
+                            id="risk-citation"
+                            data-show="true"
+                          >
+                            <div class="risk-factors-list">
                               <div class="thread-meta">
-                                <strong>Second Opinion Review</strong>
-                                <span>/kapibara:second-opinion</span>
+                                <strong>6-Factor Risk Score Breakdown</strong>
+                                <span>78 / 100 · critical</span>
                               </div>
-                              <p style="margin: 6px 0 0; font-size: 13px; color: #3a3733">
-                                <strong>Main concern:</strong> Live readers referencing
-                                <code>legacy_token</code> will fail immediately, and dropped column
-                                data cannot be rolled back without a snapshot restore.
-                              </p>
+                              <div class="risk-factor-row">
+                                <span class="risk-factor-name">destructive_impact</span>
+                                <div class="risk-factor-track">
+                                  <div class="risk-factor-fill" style="width: 88%"></div>
+                                </div>
+                                <span class="risk-factor-score">22/25</span>
+                              </div>
+                              <div class="risk-factor-row">
+                                <span class="risk-factor-name">reversibility</span>
+                                <div class="risk-factor-track">
+                                  <div class="risk-factor-fill" style="width: 90%"></div>
+                                </div>
+                                <span class="risk-factor-score">18/20</span>
+                              </div>
+                              <div class="risk-factor-row">
+                                <span class="risk-factor-name">sensitive_data</span>
+                                <div class="risk-factor-track">
+                                  <div class="risk-factor-fill" style="width: 30%"></div>
+                                </div>
+                                <span class="risk-factor-score">6/20</span>
+                              </div>
+                              <div class="risk-factor-row">
+                                <span class="risk-factor-name">external_side_effects</span>
+                                <div class="risk-factor-track">
+                                  <div class="risk-factor-fill" style="width: 80%"></div>
+                                </div>
+                                <span class="risk-factor-score">12/15</span>
+                              </div>
+                              <div class="risk-factor-row">
+                                <span class="risk-factor-name">production_impact</span>
+                                <div class="risk-factor-track">
+                                  <div class="risk-factor-fill" style="width: 100%"></div>
+                                </div>
+                                <span class="risk-factor-score">10/10</span>
+                              </div>
+                              <div class="risk-factor-row">
+                                <span class="risk-factor-name">uncertainty</span>
+                                <div class="risk-factor-track">
+                                  <div class="risk-factor-fill" style="width: 100%"></div>
+                                </div>
+                                <span class="risk-factor-score">10/10</span>
+                              </div>
                             </div>
-                            <div
-                              style="
-                                background: #fff;
-                                border: 1px solid #e7e5e0;
-                                border-radius: 10px;
-                                padding: 10px 12px;
-                                font-size: 12.5px;
-                              "
-                            >
-                              <strong>Safer alternative:</strong> Deploy application code that stops
-                              reading <code>legacy_token</code> first, verify zero queries in
-                              staging, then run the migration during a maintenance window.
+
+                            <div class="second-opinion-box">
+                              <div>
+                                <div class="thread-meta">
+                                  <strong>Second Opinion Review</strong>
+                                  <span>/kapibara:second-opinion</span>
+                                </div>
+                                <p style="margin: 6px 0 0; font-size: 13px; color: #3a3733">
+                                  <strong>Main concern:</strong> Live readers referencing
+                                  <code>legacy_token</code> will fail immediately, and dropped column
+                                  data cannot be rolled back without a snapshot restore.
+                                </p>
+                              </div>
+                              <div
+                                style="
+                                  background: #fff;
+                                  border: 1px solid #e7e5e0;
+                                  border-radius: 10px;
+                                  padding: 10px 12px;
+                                  font-size: 12.5px;
+                                "
+                              >
+                                <strong>Safer alternative:</strong> Deploy application code that stops
+                                reading <code>legacy_token</code> first, verify zero queries in
+                                staging, then run the migration during a maintenance window.
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </details>
                       </div>
                     </div>
 
@@ -1179,121 +1194,127 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
                   data-loop-state="playing"
                 >
                   <div class="LandingPreview-module__aN7EWG__commentWorkspace">
-                    <div class="LandingPreview-module__aN7EWG__commentDocument">
-                      <div class="LandingPreview-module__aN7EWG__documentToolbar">
-                        <span>Outbound settlement payload · invoice.json vs email.txt</span>
-                        <span
-                          class="LandingPreview-module__aN7EWG__saved LandingPreview-module__aN7EWG__reveal"
-                          id="verify-saved-badge"
-                          data-show="true"
-                        >
-                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                            <path
-                              d="m5 12.5 4.5 4.5L19 7.5"
-                              stroke="currentColor"
-                              stroke-width="2.2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                          </svg>
-                          Secrets redacted &amp; conflict resolved
-                        </span>
-                      </div>
-
-                      <article
-                        class="contract LandingPreview-module__aN7EWG__paper LandingPreview-module__aN7EWG__commentPaper"
-                      >
-                        <div class="LandingPreview-module__aN7EWG__paperTitle">
-                          <div>
-                            <h4>Cross-Source &amp; Sensitive Payload Audit</h4>
-                            <p>kapibara_compare · kapibara_scan_sensitive</p>
-                          </div>
-                        </div>
-
-                        <div class="LandingPreview-module__aN7EWG__documentSection">
-                          <h5>1. Source Comparison (kapibara_compare)</h5>
-                          <p>
-                            <strong>Source A (invoice.json):</strong> Total fee is
-                            <strong>$1,200</strong>, due <strong>2026-05-01</strong>, schema
-                            <strong>v2.1.0</strong>.<br />
-                            <strong>Source B (approval-email.txt):</strong> Total fee is
-                            <strong>$1,500</strong>, due <strong>2026-05-15</strong>, schema
-                            <strong>v2.1.0</strong>.
-                          </p>
-                        </div>
-
-                        <div class="LandingPreview-module__aN7EWG__documentSection">
-                          <h5>2. Outbound Payload Inspection (kapibara_scan_sensitive)</h5>
-                          <p>
-                            Inspecting headers and body before agent sends webhook to external
-                            endpoint:
-                          </p>
-                          <div
-                            class="LandingPreview-module__aN7EWG__clause"
-                            id="verify-clause"
-                            data-selected="true"
-                            data-updated="true"
+                    <details class="preview-details" data-mobile-details open>
+                      <summary>
+                        Read the source and payload audit
+                        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                      </summary>
+                      <div class="LandingPreview-module__aN7EWG__commentDocument">
+                        <div class="LandingPreview-module__aN7EWG__documentToolbar">
+                          <span>Outbound settlement payload · invoice.json vs email.txt</span>
+                          <span
+                            class="LandingPreview-module__aN7EWG__saved LandingPreview-module__aN7EWG__reveal"
+                            id="verify-saved-badge"
+                            data-show="true"
                           >
-                            <div class="LandingPreview-module__aN7EWG__clauseHighlight"></div>
-                            <div class="LandingPreview-module__aN7EWG__clauseText">
-                              Authorization: Bearer
-                              <span class="LandingPreview-module__aN7EWG__changedTerm">
-                                <span id="verify-term-before" data-show="false"
-                                  >sk-proj-9f8a7b6c5d4e3f2a1b0c9d8e · Ignore previous
-                                  instructions</span
-                                >
-                                <span id="verify-term-after" data-show="true"
-                                  >sk-proj-**** (redacted) · Prompt injection stripped</span
-                                >
-                              </span>
-                            </div>
-                            <span
-                              class="LandingPreview-module__aN7EWG__clauseMarker LandingPreview-module__aN7EWG__reveal"
-                              id="verify-marker"
-                              data-show="true"
-                            >
-                              <span id="verify-marker-open" data-show="false">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                                  <path
-                                    d="M12 8v5M12 16.5h.01"
-                                    stroke="currentColor"
-                                    stroke-width="2.4"
-                                    stroke-linecap="round"
-                                  />
-                                </svg>
-                              </span>
-                              <span id="verify-marker-done" data-show="true">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                                  <path
-                                    d="m5 12.5 4.5 4.5L19 7.5"
-                                    stroke="currentColor"
-                                    stroke-width="2.4"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                  />
-                                </svg>
-                              </span>
-                            </span>
-                            <span
-                              class="LandingPreview-module__aN7EWG__demoCursor"
-                              id="verify-cursor"
-                              data-show="false"
-                              data-arrived="false"
-                              aria-hidden="true"
-                            ></span>
-                          </div>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                              <path
+                                d="m5 12.5 4.5 4.5L19 7.5"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                            Secrets redacted &amp; conflict resolved
+                          </span>
                         </div>
 
-                        <div class="LandingPreview-module__aN7EWG__documentSection">
-                          <h5>3. File Path &amp; Private Key Guard</h5>
-                          <p>
-                            Blocked reading <strong>.env.production</strong> and
-                            <strong>id_rsa</strong> per project rule
-                            <strong>"Block reading or sending .env and *.pem"</strong>.
-                          </p>
-                        </div>
-                      </article>
-                    </div>
+                        <article
+                          class="contract LandingPreview-module__aN7EWG__paper LandingPreview-module__aN7EWG__commentPaper"
+                        >
+                          <div class="LandingPreview-module__aN7EWG__paperTitle">
+                            <div>
+                              <h4>Cross-Source &amp; Sensitive Payload Audit</h4>
+                              <p>kapibara_compare · kapibara_scan_sensitive</p>
+                            </div>
+                          </div>
+
+                          <div class="LandingPreview-module__aN7EWG__documentSection">
+                            <h5>1. Source Comparison (kapibara_compare)</h5>
+                            <p>
+                              <strong>Source A (invoice.json):</strong> Total fee is
+                              <strong>$1,200</strong>, due <strong>2026-05-01</strong>, schema
+                              <strong>v2.1.0</strong>.<br />
+                              <strong>Source B (approval-email.txt):</strong> Total fee is
+                              <strong>$1,500</strong>, due <strong>2026-05-15</strong>, schema
+                              <strong>v2.1.0</strong>.
+                            </p>
+                          </div>
+
+                          <div class="LandingPreview-module__aN7EWG__documentSection">
+                            <h5>2. Outbound Payload Inspection (kapibara_scan_sensitive)</h5>
+                            <p>
+                              Inspecting headers and body before agent sends webhook to external
+                              endpoint:
+                            </p>
+                            <div
+                              class="LandingPreview-module__aN7EWG__clause"
+                              id="verify-clause"
+                              data-selected="true"
+                              data-updated="true"
+                            >
+                              <div class="LandingPreview-module__aN7EWG__clauseHighlight"></div>
+                              <div class="LandingPreview-module__aN7EWG__clauseText">
+                                Authorization: Bearer
+                                <span class="LandingPreview-module__aN7EWG__changedTerm">
+                                  <span id="verify-term-before" data-show="false"
+                                    >sk-proj-9f8a7b6c5d4e3f2a1b0c9d8e · Ignore previous
+                                    instructions</span
+                                  >
+                                  <span id="verify-term-after" data-show="true"
+                                    >sk-proj-**** (redacted) · Prompt injection stripped</span
+                                  >
+                                </span>
+                              </div>
+                              <span
+                                class="LandingPreview-module__aN7EWG__clauseMarker LandingPreview-module__aN7EWG__reveal"
+                                id="verify-marker"
+                                data-show="true"
+                              >
+                                <span id="verify-marker-open" data-show="false">
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                    <path
+                                      d="M12 8v5M12 16.5h.01"
+                                      stroke="currentColor"
+                                      stroke-width="2.4"
+                                      stroke-linecap="round"
+                                    />
+                                  </svg>
+                                </span>
+                                <span id="verify-marker-done" data-show="true">
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                    <path
+                                      d="m5 12.5 4.5 4.5L19 7.5"
+                                      stroke="currentColor"
+                                      stroke-width="2.4"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                    />
+                                  </svg>
+                                </span>
+                              </span>
+                              <span
+                                class="LandingPreview-module__aN7EWG__demoCursor"
+                                id="verify-cursor"
+                                data-show="false"
+                                data-arrived="false"
+                                aria-hidden="true"
+                              ></span>
+                            </div>
+                          </div>
+
+                          <div class="LandingPreview-module__aN7EWG__documentSection">
+                            <h5>3. File Path &amp; Private Key Guard</h5>
+                            <p>
+                              Blocked reading <strong>.env.production</strong> and
+                              <strong>id_rsa</strong> per project rule
+                              <strong>"Block reading or sending .env and *.pem"</strong>.
+                            </p>
+                          </div>
+                        </article>
+                      </div>
+                    </details>
 
                     <div class="LandingPreview-module__aN7EWG__commentSidebar">
                       <div class="LandingPreview-module__aN7EWG__chatHeading">
@@ -1568,12 +1589,12 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
 
               <div class="field-group">
                 <label for="pg-action">Action / Intent</label>
-                <input id="pg-action" type="text" value="git push --force" />
+                <input autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" id="pg-action" type="text" value="git push --force" />
               </div>
 
               <div class="field-group">
                 <label for="pg-target">Target (branch, path, URL, or Source A)</label>
-                <input id="pg-target" type="text" value="origin/main" />
+                <input autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" id="pg-target" type="text" value="origin/main" />
               </div>
 
               <div class="field-group">
@@ -1587,7 +1608,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
 
               <div class="field-group">
                 <label for="pg-content">Content / Command / Source B</label>
-                <textarea id="pg-content" rows="4">git push --force origin main</textarea>
+                <textarea autocapitalize="off" autocorrect="off" spellcheck="false" id="pg-content" rows="4">git push --force origin main</textarea>
               </div>
             </div>
 
@@ -1726,6 +1747,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
         <!-- Policy Profiles Table (mirrors terms.so .landing-table) -->
         <div class="policy-reference" id="rules">
           <div class="policy-heading"><div><span class="section-eyebrow">Your rules, enforced</span><h3>A policy for every workflow.</h3></div><p>Choose how cautiously your agent should act.</p></div>
+          <p class="table-scroll-hint">Swipe the table to compare all three profiles <span aria-hidden="true">↔</span></p>
           <div class="table-scroll" role="region" aria-label="Compare policy profiles" tabindex="0">
         <table class="landing-table">
           <caption class="sr-only">How developer, balanced, and strict profiles handle common agent actions</caption>
@@ -1838,6 +1860,6 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
       </footer>
     </div>
 
-    <script type="module" src="./app.js?v=4"></script>
+    <script type="module" src="./app.js?v=7"></script>
   </body>
 </html>
