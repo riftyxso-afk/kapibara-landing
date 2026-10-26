@@ -294,53 +294,15 @@ function initHeroPoetry() {
 // 2. HeroHeadline Typewriter (from terms.so 3xqw-0azxo1gf.js)
 // ----------------------------------------------------------------------------
 const HEADLINE_LINES = [
-  {
-    muted: true,
-    segments: [
-      { text: "Check " },
-      { text: "r", kern: true },
-      { text: "isky actions be" },
-      { text: "f", kern: true },
-      { text: "ore they " },
-      { text: "r", kern: true },
-      { text: "un." },
-    ],
-  },
-  {
-    muted: true,
-    segments: [
-      { text: "Compa" },
-      { text: "r", kern: true },
-      { text: "e sou" },
-      { text: "r", kern: true },
-      { text: "ces " },
-      { text: "f", kern: true },
-      { text: "or hidden conflicts." },
-    ],
-  },
-  {
-    muted: true,
-    segments: [
-      { text: "Scan sec" },
-      { text: "r", kern: true },
-      { text: "ets and p" },
-      { text: "r", kern: true },
-      { text: "ompt injections." },
-    ],
-  },
-  {
-    muted: false,
-    segments: [{ text: "Your AI can act. Kapibara checks first." }],
-  },
+  { muted: true, segments: [{ text: "Your AI can act." }] },
+  { muted: false, segments: [{ text: "Kapibara checks first." }] },
 ];
 
 const HEADLINE_TIMING = {
-  completionDelay: 400,
+  completionDelay: 150,
   lines: [
-    { delay: 160, duration: 540 },
-    { delay: 140, duration: 580 },
-    { delay: 140, duration: 580 },
-    { delay: 260, duration: 720 },
+    { delay: 100, duration: 420 },
+    { delay: 100, duration: 520 },
   ],
 };
 
@@ -684,45 +646,88 @@ function initSetupForAgent() {
   const codeEl = document.getElementById("agent-config-code");
   const copyBtn = document.getElementById("copy-agent-config");
   const copyLabel = document.getElementById("copy-agent-label");
+  const languageEl = document.getElementById("agent-code-language");
+  const panel = document.getElementById("agent-setup-panel");
 
   if (!container || !triggerBtn || !popover || !codeEl) return;
 
   let currentAgent = "claude-code";
   let currentMode = "npx";
   let copyTimeout = null;
+  let opener = triggerBtn;
+  const tabs = [...popover.querySelectorAll(".agent-tab")];
+  const mobile = window.matchMedia("(max-width: 640px)");
+
+  function resetCopyState() {
+    clearTimeout(copyTimeout);
+    if (copyBtn) copyBtn.dataset.copied = "false";
+    if (copyLabel) copyLabel.textContent = "Copy";
+  }
 
   function renderAgentConfig() {
     const cfg = AGENT_CONFIGS[currentAgent] || AGENT_CONFIGS["claude-code"];
     if (labelEl) labelEl.textContent = cfg.label;
     if (targetEl) targetEl.textContent = cfg.target;
     codeEl.textContent = cfg[currentMode] || cfg.npx;
+    codeEl.scrollTop = 0;
+    codeEl.scrollLeft = 0;
+    if (languageEl)
+      languageEl.textContent =
+        currentAgent === "claude-code" ? "Terminal" : currentAgent === "codex" ? "TOML" : "JSON";
+    tabs.forEach((tab) => {
+      const selected = tab.dataset.agent === currentAgent;
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    panel?.setAttribute("aria-labelledby", `agent-tab-${currentAgent}`);
+    resetCopyState();
+    if (popover.dataset.open === "true") positionPopover();
   }
 
-  function setOpen(open) {
+  function positionPopover() {
+    const rect = container.getBoundingClientRect();
+    const offset = Math.min(0, window.innerWidth - 20 - rect.left - popover.offsetWidth);
+    popover.style.setProperty("--popover-offset", `${offset}px`);
+    const height = popover.offsetHeight;
+    let top = rect.height + 12;
+    if (window.innerHeight - rect.bottom - 16 < height) {
+      top =
+        rect.top - 16 >= height
+          ? -height - 12
+          : Math.max(16 - rect.top, window.innerHeight - 16 - height - rect.top);
+    }
+    popover.style.setProperty("--popover-top", `${top}px`);
+    document.body.style.overflow =
+      mobile.matches && popover.dataset.open === "true" ? "hidden" : "";
+    popover.setAttribute("aria-modal", String(mobile.matches));
+  }
+
+  function setOpen(open, source) {
+    if (open && source) opener = source;
+    const restoreFocus = !open && popover.contains(document.activeElement);
     popover.dataset.open = open ? "true" : "false";
+    popover.inert = !open;
+    popover.setAttribute("aria-hidden", String(!open));
     triggerBtn.setAttribute("aria-expanded", open ? "true" : "false");
     const backdrop = document.getElementById("agent-setup-backdrop");
     if (backdrop) backdrop.dataset.open = open ? "true" : "false";
-    if (open) {
-      if (window.innerWidth <= 640) {
-        document.body.style.overflow = "hidden";
-      }
-    } else {
-      document.body.style.overflow = "";
-    }
+    positionPopover();
+    if (open)
+      tabs.find((tab) => tab.dataset.agent === currentAgent)?.focus({ preventScroll: true });
+    else if (restoreFocus) opener.focus({ preventScroll: true });
   }
 
   triggerBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     const isOpen = popover.dataset.open === "true";
-    setOpen(!isOpen);
+    setOpen(!isOpen, triggerBtn);
   });
 
   document.querySelectorAll("[data-open-agent-setup]").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
       window.scrollTo({ top: 0, behavior: "smooth" });
-      setOpen(true);
+      setOpen(true, btn);
     });
   });
 
@@ -735,18 +740,13 @@ function initSetupForAgent() {
   document.querySelectorAll("[data-select-agent]").forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const agent = link.getAttribute("data-select-agent");
       if (agent && AGENT_CONFIGS[agent]) {
         currentAgent = agent;
-        popover.querySelectorAll(".agent-tab").forEach((t) => {
-          t.setAttribute(
-            "aria-selected",
-            t.getAttribute("data-agent") === currentAgent ? "true" : "false",
-          );
-        });
         renderAgentConfig();
         window.scrollTo({ top: 0, behavior: "smooth" });
-        setOpen(true);
+        setOpen(true, link);
       }
     });
   });
@@ -756,10 +756,24 @@ function initSetupForAgent() {
       const agent = tab.getAttribute("data-agent");
       if (!agent) return;
       currentAgent = agent;
-      popover.querySelectorAll(".agent-tab").forEach((t) => {
-        t.setAttribute("aria-selected", t === tab ? "true" : "false");
-      });
       renderAgentConfig();
+    });
+    tab.addEventListener("keydown", (event) => {
+      const index = tabs.indexOf(tab);
+      const next =
+        event.key === "Home"
+          ? 0
+          : event.key === "End"
+            ? tabs.length - 1
+            : event.key === "ArrowRight"
+              ? (index + 1) % tabs.length
+              : event.key === "ArrowLeft"
+                ? (index - 1 + tabs.length) % tabs.length
+                : null;
+      if (next === null) return;
+      event.preventDefault();
+      tabs[next].click();
+      tabs[next].focus();
     });
   });
 
@@ -784,9 +798,21 @@ function initSetupForAgent() {
         const ta = document.createElement("textarea");
         ta.value = text;
         document.body.appendChild(ta);
+        ta.style.cssText = "position:fixed;opacity:0;pointer-events:none";
         ta.select();
-        document.execCommand("copy");
-        ta.remove();
+        let copied = false;
+        try {
+          copied = document.execCommand("copy");
+        } catch {
+          /* Show an honest retry state below. */
+        } finally {
+          ta.remove();
+          copyBtn.focus();
+        }
+        if (!copied) {
+          if (copyLabel) copyLabel.textContent = "Retry";
+          return;
+        }
       }
       copyBtn.dataset.copied = "true";
       if (copyLabel) copyLabel.textContent = "Copied";
@@ -811,9 +837,32 @@ function initSetupForAgent() {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && popover.dataset.open === "true") {
       setOpen(false);
-      triggerBtn.focus();
+      opener.focus({ preventScroll: true });
+    }
+    if (e.key === "Tab" && mobile.matches && popover.dataset.open === "true") {
+      const focusable = [
+        ...popover.querySelectorAll('button:not([disabled]), a[href], [tabindex="0"]'),
+      ].filter((el) => el.getClientRects().length);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
+  window.addEventListener("resize", positionPopover);
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!mobile.matches && popover.dataset.open === "true") positionPopover();
+    },
+    { passive: true },
+  );
+  renderAgentConfig();
 }
 
 // ----------------------------------------------------------------------------
@@ -1079,7 +1128,7 @@ function initAllPreviews() {
 }
 
 // ----------------------------------------------------------------------------
-// 7. Interactive Live Playground (with /api/evaluate + local deterministic fallback)
+// 7. Interactive Playground (browser evaluator, with an optional API endpoint)
 // ----------------------------------------------------------------------------
 const PLAYGROUND_PRESETS = {
   "force-push": {
@@ -1324,17 +1373,19 @@ function initPlayground() {
     };
 
     let result = null;
-    try {
-      const resp = await fetch("/api/evaluate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(input),
-      });
-      if (resp.ok) {
-        result = await resp.json();
+    // A static host has no API. Only call a backend when explicitly configured.
+    const endpoint = document.querySelector('meta[name="kapibara-evaluate-endpoint"]')?.content;
+    if (endpoint) {
+      try {
+        const resp = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(input),
+        });
+        if (resp.ok) result = await resp.json();
+      } catch {
+        // Keep the browser demo usable when the configured backend is unavailable.
       }
-    } catch {
-      // Fallback to client-side deterministic engine when served statically
     }
 
     if (!result) {

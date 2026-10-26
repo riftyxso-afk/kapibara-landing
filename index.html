@@ -13,14 +13,15 @@
     />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fcfbf9" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e0d0c" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="light" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="icon" type="image/png" href="./assets/favicon.png" />
     <link rel="apple-touch-icon" href="./assets/logo.png" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=4" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="landing landing--wide landing--home">
       <!-- Top Navigation (mirrors terms.so .landing-nav.landing-col) -->
       <header class="landing-nav landing-col">
@@ -67,6 +68,7 @@
         </nav>
       </header>
 
+      <main id="main-content" class="landing-main">
       <!-- Hero Section (mirrors terms.so .landing-hero.landing-hero--home) -->
       <div class="landing-hero landing-hero--home landing-col" id="top">
         <!-- Floating Monospace Agent Prompts on Left & Right Margins -->
@@ -87,34 +89,19 @@
           <pre class="landing-poetry-grid" data-side="right" id="poetry-right"></pre>
         </div>
 
-        <!-- Animated 4-Line Hero Headline -->
-        <h1
-          class="landing-headline"
-          id="hero-headline"
-          aria-label="Check risky actions before they run. Compare sources for hidden conflicts. Scan secrets and prompt injections. Your AI can act. Kapibara checks first."
-        >
-          <span class="landing-headline-line landing-headline-brand" data-line="0"
-            >Check <span class="landing-kern">r</span>isky actions be<span class="landing-kern"
-              >f</span
-            >ore they <span class="landing-kern">r</span>un.</span
-          >
-          <span class="landing-headline-line landing-headline-brand" data-line="1"
-            >Compa<span class="landing-kern">r</span>e sou<span class="landing-kern">r</span>ces
-            <span class="landing-kern">f</span>or hidden conflicts.</span
-          >
-          <span class="landing-headline-line landing-headline-brand" data-line="2"
-            >Scan sec<span class="landing-kern">r</span>ets and p<span class="landing-kern">r</span
-            >ompt injections.</span
-          >
-          <span class="landing-headline-line" data-line="3"
-            >Your AI can act. Kapibara checks first.</span
-          >
-        </h1>
+        <div class="hero-intro">
+          <p class="hero-eyebrow"><span aria-hidden="true"></span> A verification layer for AI agents</p>
+          <h1 class="landing-headline" id="hero-headline" aria-label="Your AI can act. Kapibara checks first.">
+            <span class="landing-headline-line landing-headline-brand" data-line="0">Your AI can act.</span>
+            <span class="landing-headline-line" data-line="1">Kapibara checks first.</span>
+          </h1>
+          <p class="hero-description">Catch risky actions, conflicting sources, and exposed secrets before they become side effects. One lightweight layer. Right inside your agent.</p>
+        </div>
 
         <!-- Hero CTA Bar: Orange CTA + "Setup for agent" Pill with Overlapping Agent Logos -->
         <div class="landing-cta-wrap landing-chips" id="hero-chips" data-show="true">
           <div class="hero-primary-actions">
-            <a class="action-button hero-btn-orange" href="#playground"> Run preflight </a>
+            <a class="action-button hero-btn-orange" href="#playground">Try the playground <span aria-hidden="true">↗</span></a>
 
             <div class="agent-setup-trigger-wrap" id="agent-setup-container">
               <button
@@ -127,56 +114,18 @@
                 <span class="agent-avatar-stack" aria-hidden="true">
                   <!-- 1. OpenAI / Codex Logo -->
                   <span class="agent-avatar agent-avatar--openai" title="OpenAI Codex">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M21.55 10.04A5.57 5.57 0 0 0 16.76 2.9a5.59 5.59 0 0 0-9.52-1.15A5.57 5.57 0 0 0 1.9 7.5a5.58 5.58 0 0 0 .68 6.46 5.57 5.57 0 0 0 4.79 7.14 5.59 5.59 0 0 0 9.52 1.15 5.57 5.57 0 0 0 5.34-5.75 5.58 5.58 0 0 0-.68-6.46Z"
-                        stroke="currentColor"
-                        stroke-width="1.75"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M12 7.2v9.6M7.84 9.6l8.32 4.8M16.16 9.6l-8.32 4.8"
-                        stroke="currentColor"
-                        stroke-width="1.65"
-                        stroke-linecap="round"
-                      />
-                    </svg>
+                    <img src="./assets/agents/openai.svg" alt="" width="20" height="20" />
                   </span>
                   <!-- 2. Claude / Anthropic Logo -->
                   <span
                     class="agent-avatar agent-avatar--claude"
                     title="Claude Code &amp; Claude Desktop"
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M12 2.75v18.5M4.6 6.4l14.8 11.2M19.4 6.4 4.6 17.6M2.9 12h18.2M8.1 3.5l7.8 17M15.9 3.5l-7.8 17"
-                        stroke="currentColor"
-                        stroke-width="2.1"
-                        stroke-linecap="round"
-                      />
-                    </svg>
+                    <img src="./assets/agents/claude.ico" alt="" width="20" height="20" />
                   </span>
                   <!-- 3. Cursor Cube Logo -->
                   <span class="agent-avatar agent-avatar--cursor" title="Cursor">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M12 2.6 20.2 7.3v9.4L12 21.4 3.8 16.7V7.3L12 2.6Z"
-                        stroke="currentColor"
-                        stroke-width="1.75"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M12 2.6 20.2 7.3 12 12 3.8 7.3 12 2.6Z"
-                        fill="currentColor"
-                        fill-opacity="0.28"
-                      />
-                      <path
-                        d="M12 12v9.4M12 12l8.2-4.7M12 12 3.8 7.3"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
+                    <img src="./assets/agents/cursor.svg" alt="" width="20" height="20" />
                   </span>
                 </span>
                 <span>Setup for agent</span>
@@ -203,7 +152,10 @@
                 class="agent-setup-popover"
                 id="agent-setup-popover"
                 role="dialog"
-                aria-label="Setup Kapibara for your AI agent"
+                aria-labelledby="agent-setup-title"
+                aria-describedby="agent-setup-description"
+                aria-hidden="true"
+                inert
                 data-open="false"
               >
                 <div class="sheet-drag-handle" aria-hidden="true"></div>
@@ -224,7 +176,7 @@
                 </button>
                 <div class="agent-popover-head">
                   <div class="agent-popover-title">
-                    <h2>
+                    <h2 id="agent-setup-title">
                       <img
                         class="kapibara-inline-logo"
                         src="./assets/logo.png"
@@ -233,7 +185,7 @@
                         height="20"
                       />Connect Kapibara MCP &amp; skills
                     </h2>
-                    <p>5 read-only verification tools and 6 slash skills over local stdio.</p>
+                    <p id="agent-setup-description">Connect your agent. Get 5 verification tools and 6 skills.</p>
                   </div>
                   <div class="agent-mode-switch" role="group" aria-label="Install mode">
                     <button
@@ -250,7 +202,7 @@
                       data-install-mode="local"
                       aria-pressed="false"
                     >
-                      Local --cwd
+                      Local
                     </button>
                   </div>
                 </div>
@@ -261,17 +213,13 @@
                     role="tab"
                     class="agent-tab"
                     data-agent="claude-code"
+                    id="agent-tab-claude-code"
+                    aria-controls="agent-setup-panel"
+                    tabindex="0"
                     aria-selected="true"
                   >
                     <span class="agent-avatar agent-avatar--claude" aria-hidden="true">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                        <path
-                          d="M12 2.75v18.5M4.6 6.4l14.8 11.2M19.4 6.4 4.6 17.6M2.9 12h18.2"
-                          stroke="currentColor"
-                          stroke-width="2.2"
-                          stroke-linecap="round"
-                        />
-                      </svg>
+                    <img src="./assets/agents/claude.ico" alt="" width="20" height="20" />
                     </span>
                     <span>Claude Code</span>
                   </button>
@@ -281,17 +229,13 @@
                     role="tab"
                     class="agent-tab"
                     data-agent="codex"
+                    id="agent-tab-codex"
+                    aria-controls="agent-setup-panel"
+                    tabindex="-1"
                     aria-selected="false"
                   >
                     <span class="agent-avatar agent-avatar--openai" aria-hidden="true">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                        <circle cx="12" cy="12" r="7.5" stroke="currentColor" stroke-width="2" />
-                        <path
-                          d="M12 6.5v11M7.2 9.2l9.6 5.6M16.8 9.2l-9.6 5.6"
-                          stroke="currentColor"
-                          stroke-width="1.7"
-                        />
-                      </svg>
+                    <img src="./assets/agents/openai.svg" alt="" width="20" height="20" />
                     </span>
                     <span>Codex</span>
                   </button>
@@ -301,16 +245,13 @@
                     role="tab"
                     class="agent-tab"
                     data-agent="cursor"
+                    id="agent-tab-cursor"
+                    aria-controls="agent-setup-panel"
+                    tabindex="-1"
                     aria-selected="false"
                   >
                     <span class="agent-avatar agent-avatar--cursor" aria-hidden="true">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                        <path
-                          d="M12 2.8 19.8 7.3v9.4L12 21.2 4.2 16.7V7.3L12 2.8Z"
-                          stroke="currentColor"
-                          stroke-width="2"
-                        />
-                      </svg>
+                    <img src="./assets/agents/cursor.svg" alt="" width="20" height="20" />
                     </span>
                     <span>Cursor</span>
                   </button>
@@ -320,18 +261,13 @@
                     role="tab"
                     class="agent-tab"
                     data-agent="opencode"
+                    id="agent-tab-opencode"
+                    aria-controls="agent-setup-panel"
+                    tabindex="-1"
                     aria-selected="false"
                   >
                     <span class="agent-avatar agent-avatar--opencode" aria-hidden="true">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                        <path
-                          d="m7.5 8.5-4 3.5 4 3.5M16.5 8.5l4 3.5-4 3.5M13.5 6.5l-3 11"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
+                    <img src="./assets/agents/opencode.png" alt="" width="20" height="20" />
                     </span>
                     <span>OpenCode</span>
                   </button>
@@ -341,32 +277,26 @@
                     role="tab"
                     class="agent-tab"
                     data-agent="claude-desktop"
+                    id="agent-tab-claude-desktop"
+                    aria-controls="agent-setup-panel"
+                    tabindex="-1"
                     aria-selected="false"
                   >
                     <span class="agent-avatar agent-avatar--claude" aria-hidden="true">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                        <path
-                          d="M12 2.75v18.5M4.6 6.4l14.8 11.2M19.4 6.4 4.6 17.6M2.9 12h18.2"
-                          stroke="currentColor"
-                          stroke-width="2.2"
-                          stroke-linecap="round"
-                        />
-                      </svg>
+                    <img src="./assets/agents/claude.ico" alt="" width="20" height="20" />
                     </span>
                     <span>Claude Desktop</span>
                   </button>
                 </div>
 
-                <div class="agent-panel" id="agent-setup-panel">
+                <div class="agent-panel" id="agent-setup-panel" role="tabpanel" aria-labelledby="agent-tab-claude-code" tabindex="0">
                   <div class="agent-panel-meta">
                     <span id="agent-config-label">Run in terminal (MCP + Plugin skills)</span>
                     <code id="agent-config-target">claude mcp add kapibara</code>
                   </div>
                   <div class="agent-code-box">
-                    <pre id="agent-config-code">
-claude mcp add kapibara -- npx -y @kapibara/mcp
-claude plugin marketplace add https://github.com/kapibara/kapibara
-claude plugin install kapibara</pre>
+                    <div class="agent-code-toolbar"><span id="agent-code-language">Terminal</span>
+
                     <button
                       type="button"
                       class="copy-pill-btn"
@@ -402,8 +332,13 @@ claude plugin install kapibara</pre>
                           />
                         </svg>
                       </span>
-                      <span id="copy-agent-label">Copy</span>
+                      <span id="copy-agent-label" aria-live="polite">Copy</span>
                     </button>
+                    </div>
+                    <pre id="agent-config-code">
+claude mcp add kapibara -- npx -y @kapibara/mcp
+claude plugin marketplace add https://github.com/kapibara/kapibara
+claude plugin install kapibara</pre>
                   </div>
                   <div class="agent-popover-foot">
                     <span>Verify connection by calling <code>kapibara_rules_check</code>.</span>
@@ -444,6 +379,18 @@ claude plugin install kapibara</pre>
         </div>
       </div>
 
+      <div class="integration-strip landing-col" aria-label="Supported AI agents">
+        <span class="integration-label">Built for your workflow</span>
+        <div class="integration-agents">
+          <button type="button" class="integration-agent" data-select-agent="claude-code"><img src="./assets/agents/claude.ico" alt="" width="22" height="22" /><span>Claude Code</span></button>
+          <button type="button" class="integration-agent" data-select-agent="codex"><img src="./assets/agents/openai.svg" alt="" width="22" height="22" /><span>Codex</span></button>
+          <button type="button" class="integration-agent" data-select-agent="cursor"><img src="./assets/agents/cursor.svg" alt="" width="22" height="22" /><span>Cursor</span></button>
+          <button type="button" class="integration-agent" data-select-agent="opencode"><img src="./assets/agents/opencode.png" alt="" width="22" height="22" /><span>OpenCode</span></button>
+          <button type="button" class="integration-agent" data-select-agent="claude-desktop"><img src="./assets/agents/claude.ico" alt="" width="22" height="22" /><span>Claude Desktop</span></button>
+        </div>
+        <span class="integration-note">Local stdio <span aria-hidden="true">·</span> Read-only tools</span>
+      </div>
+
       <!-- 3 Animated Squircle Preview Cards (mirrors terms.so .LandingPreview-module__aN7EWG__previews) -->
       <div class="LandingPreview-module__aN7EWG__previews landing-col">
         <!-- ============================================================ -->
@@ -464,6 +411,7 @@ claude plugin install kapibara</pre>
             </div>
             <div class="squircle-body">
               <header class="LandingPreview-module__aN7EWG__featureHeader">
+                <span class="feature-step"><span>01</span> Check before execution</span>
                 <svg
                   class="LandingPreview-module__aN7EWG__featureBorder"
                   aria-hidden="true"
@@ -897,6 +845,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
             </div>
             <div class="squircle-body">
               <header class="LandingPreview-module__aN7EWG__featureHeader">
+                <span class="feature-step"><span>02</span> Understand the impact</span>
                 <h2 class="LandingPreview-module__aN7EWG__featureHeading" id="preview-risk">
                   Score risk and get a second opinion
                 </h2>
@@ -1171,6 +1120,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
             </div>
             <div class="squircle-body">
               <header class="LandingPreview-module__aN7EWG__featureHeader">
+                <span class="feature-step"><span>03</span> Trust what leaves</span>
                 <h2 class="LandingPreview-module__aN7EWG__featureHeading" id="preview-verify">
                   Compare sources and redact secrets
                 </h2>
@@ -1539,15 +1489,16 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
       <section class="landing-section landing-col" id="playground">
         <div class="section-heading-block">
           <span class="section-eyebrow">Interactive Inspector</span>
-          <h2>Test Kapibara preflight, risk, and scanners live</h2>
+          <h2>A small check. A clearer decision.</h2>
           <p>
-            Pick a preset agent scenario or edit the action, target, profile, and payload below to
-            run Kapibara’s deterministic engine.
+            Explore common scenarios with the built-in browser evaluator. Connect the MCP server
+            to check actions in your own project.
           </p>
         </div>
 
         <div class="playground-card">
           <div class="playground-toolbar">
+            <span class="playground-demo-label"><span aria-hidden="true"></span> Browser demo</span>
             <div class="playground-presets" role="group" aria-label="Preset scenarios">
               <button
                 type="button"
@@ -1640,7 +1591,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
               </div>
             </div>
 
-            <div class="playground-output">
+            <div class="playground-output" aria-label="Evaluation result">
               <div class="output-verdict-banner">
                 <div>
                   <span
@@ -1651,7 +1602,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
                   </span>
                   <h3
                     style="font-size: 16px; color: #161512; margin-top: 2px"
-                    id="pg-result-summary"
+                    id="pg-result-summary" aria-live="polite"
                   >
                     Force-pushing to protected branch main is blocked.
                   </h3>
@@ -1672,8 +1623,8 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
       <!-- ============================================================ -->
       <section class="landing-section landing-col" id="skills">
         <div class="section-heading-block">
-          <span class="section-eyebrow">Bundled Skills &amp; MCP Tools</span>
-          <h2>Six agent skills backed by five read-only MCP tools</h2>
+          <span class="section-eyebrow">The toolkit</span>
+          <h2>Six skills. One safer workflow.</h2>
           <p>
             Every Kapibara tool sets <code>readOnlyHint: true</code> and
             <code>destructiveHint: false</code>. Kapibara never executes shell commands or mutates
@@ -1683,6 +1634,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
 
         <div class="landing-plans">
           <article class="landing-card landing-plan">
+            <div class="skill-card-top"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 6v6c0 4-4 7-8 9-4-2-8-5-8-9V6l8-3Z" /><path d="m8 12 3 3 5-6" /></svg></span><span class="skill-number">01</span></div>
             <span class="skill-cmd-pill">/kapibara:preflight-check</span>
             <h3>Preflight Check</h3>
             <p>
@@ -1697,6 +1649,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
           </article>
 
           <article class="landing-card landing-plan">
+            <div class="skill-card-top"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5" /><path d="M4 19h16" /><path d="M8 15v-3" /><path d="M13 15V8" /><path d="M18 15V4" /></svg></span><span class="skill-number">02</span></div>
             <span class="skill-cmd-pill">/kapibara:action-risk</span>
             <h3>Action Risk</h3>
             <p>
@@ -1711,6 +1664,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
           </article>
 
           <article class="landing-card landing-plan">
+            <div class="skill-card-top"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4l-6 4v-4Z" /><path d="M8 9h8" /><path d="M8 13h5" /></svg></span><span class="skill-number">03</span></div>
             <span class="skill-cmd-pill">/kapibara:second-opinion</span>
             <h3>Second Opinion</h3>
             <p>
@@ -1725,6 +1679,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
           </article>
 
           <article class="landing-card landing-plan">
+            <div class="skill-card-top"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4H4v16h4" /><path d="M16 4h4v16h-4" /><path d="M8 9h8" /><path d="m13 6 3 3-3 3" /><path d="M16 15H8" /><path d="m11 12-3 3 3 3" /></svg></span><span class="skill-number">04</span></div>
             <span class="skill-cmd-pill">/kapibara:consistency-check</span>
             <h3>Consistency Check</h3>
             <p>
@@ -1738,6 +1693,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
           </article>
 
           <article class="landing-card landing-plan">
+            <div class="skill-card-top"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11V8a6 6 0 0 1 12 0v3" /><path d="M5 11h14v10H5z" /><path d="M12 15v2" /></svg></span><span class="skill-number">05</span></div>
             <span class="skill-cmd-pill">/kapibara:sensitive-data-check</span>
             <h3>Sensitive Data Check</h3>
             <p>
@@ -1752,6 +1708,7 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
           </article>
 
           <article class="landing-card landing-plan">
+            <div class="skill-card-top"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8 3 12l5 4" /><path d="M16 8l5 4-5 4" /><path d="M14 3l-4 18" /></svg></span><span class="skill-number">06</span></div>
             <span class="skill-cmd-pill">/kapibara:setup</span>
             <h3>Agent &amp; Rules Setup</h3>
             <p>
@@ -1767,7 +1724,11 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
         </div>
 
         <!-- Policy Profiles Table (mirrors terms.so .landing-table) -->
-        <table class="landing-table" id="rules">
+        <div class="policy-reference" id="rules">
+          <div class="policy-heading"><div><span class="section-eyebrow">Your rules, enforced</span><h3>A policy for every workflow.</h3></div><p>Choose how cautiously your agent should act.</p></div>
+          <div class="table-scroll" role="region" aria-label="Compare policy profiles" tabindex="0">
+        <table class="landing-table">
+          <caption class="sr-only">How developer, balanced, and strict profiles handle common agent actions</caption>
           <colgroup>
             <col style="width: 28%" />
             <col style="width: 24%" />
@@ -1776,10 +1737,10 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
           </colgroup>
           <thead>
             <tr>
-              <th>Action / Scenario</th>
-              <th><code>developer</code> profile</th>
-              <th><code>balanced</code> (default)</th>
-              <th><code>strict</code> profile</th>
+              <th scope="col">Action / Scenario</th>
+              <th scope="col"><code>developer</code> profile</th>
+              <th scope="col"><code>balanced</code> (default)</th>
+              <th scope="col"><code>strict</code> profile</th>
             </tr>
           </thead>
           <tbody>
@@ -1809,7 +1770,11 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
             </tr>
           </tbody>
         </table>
+          </div>
+        </div>
       </section>
+
+      </main>
 
       <!-- ============================================================ -->
       <!-- FOOTER (exact terms.so .landing-footer.landing-col)          -->
@@ -1873,6 +1838,6 @@ Run git push --force origin main and deploy release v2.4.0 to production.</texta
       </footer>
     </div>
 
-    <script type="module" src="./app.js"></script>
+    <script type="module" src="./app.js?v=4"></script>
   </body>
 </html>

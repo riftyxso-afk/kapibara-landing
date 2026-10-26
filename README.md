@@ -21,10 +21,10 @@ This repository contains the interactive **Kapibara Landing Page**, adapted from
 
 ### Key Highlights
 
-- **Interactive Agent Setup Popover**: Tabbed multi-agent configurations for Claude Desktop, Cursor, OpenAI Codex, OpenCode, Goose, and Cline with copy-to-clipboard configs and verification checks.
+- **Interactive Agent Setup Popover**: Tabbed multi-agent configurations for Claude Code, Codex, Cursor, OpenCode, and Claude Desktop with copy-to-clipboard configs and verification checks.
 - **6-Factor Risk Matrix**: Visual score breakdown for Action Blast Radius, Sensitive Paths, Irreversibility, Network Scope, Data Exfiltration, and Prompt Injection risk.
 - **Interactive Live Playground**: Test agent preflight commands (`git push --force`, `rm -rf`, AWS creds leaks, prompt injections) with real-time risk scores and deterministic simulation fallback.
-- **Design Craft**: Handcrafted font stacks (ABC Diatype + Geist Mono), squircle SVG clipping, subtle scanlines, dynamic pill-rail hover physics, and full dark-mode palette.
+- **Design Craft**: Handcrafted font stacks (ABC Diatype + Geist Mono), squircle SVG clipping, subtle scanlines, dynamic pill-rail hover physics, and responsive layouts with local vendor logos.
 
 ---
 
@@ -78,3 +78,9 @@ This repository includes a GitHub Actions workflow (`.github/workflows/deploy.ym
 ## 📄 License
 
 MIT © [riftyxso](https://github.com/riftyxso-afk)
+
+## Interface assets and playground
+
+Agent logos are stored locally in `assets/agents/`; vendor source URLs are documented in `assets/agents/README.md`.
+
+The playground runs its deterministic browser evaluator by default, including on GitHub Pages. To use an existing evaluation backend, add `<meta name="kapibara-evaluate-endpoint" content="/api/evaluate" />` to the page head. The endpoint should return the same result shape as `evaluateClientSide` in `app.js`.
